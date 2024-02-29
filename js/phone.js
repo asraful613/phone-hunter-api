@@ -5,7 +5,7 @@
 // }
 // loadPhone()
 
-async function loadPhone(searchText='a',isShowAll) {
+const loadPhone =async(searchText='a',isShowAll) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones=data.data;
@@ -57,9 +57,10 @@ const displayPhone = (phones,isShowAll) => {
 const handleShowDetails =async (id) => {
   console.log('click show details',id);
   // load single phone data
-  const res = await fetch(`https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089-${id}`);
+  const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
   const data = await res.json();;
   const phone =data.data;
+  console.log(phone)
   showPhoneDetails(phone)
 }
 
@@ -73,6 +74,12 @@ const showPhoneDetails = (phone) => {
   showDetailContainer.innerHTML = `
   <img src ="${phone.image}"alt ="" />
   <p><span>storage: </span> ${phone.mainFeatures.storage} </p>
+  <p><span>memory: </span> ${phone.mainFeatures.memory} </p>
+  <p><span>displaySize: </span> ${phone.mainFeatures.displaySize} </p>
+  <p><span>sensors: </span> ${phone.mainFeatures.sensors} </p>
+  <p><span>release date: </span> ${phone.
+    releaseDate
+    } </p>
   `
   // show the modal
   show_detail_modal.showModal();
